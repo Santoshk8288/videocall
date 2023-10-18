@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>view</title>
+		<script type="text/javascript" src="jquery-3.3.1.js"></script>
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	</head>
+	<body>
+		<video src="" id="video" style="width: 680;height: 320;" autoplay="true"></video>
+		<canvas id="preview"></canvas>
+		<div id="logger"></div>
+		
+		<script type="text/javascript">
+			var constraints = {
+			  audio: true,
+			  video: false
+			};
+			var canvas = document.getElementById("preview");
+			var context = canvas.getContext("2d");
+			canvas.width = 800;
+			canvas.height = 600;
+			context.width = canvas.width;
+			context.height = canvas.height;
+			var video = document.getElementById("video")
+			
+			function logger(msg){
+				$("#logger").text(msg)
+			}
+
+			function loadCam(stream){
+				video.src = window.URL.createObjectURL(stream);
+				logger('camara [ok]')
+			}
+
+
+			function loadFail(){
+				logger('camara not working') 
+			}
+
+			function viewVideo(video, context){
+				context.draw(video,0,0, context.width, context.height)
+			}
+
+			$(function(){
+				navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia);
+				console.log(navigator.getUserMedia)
+				navigator.getUserMedia(constraints, loadCam, loadFail)
+				
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>video call</title>
+</head>
+<body>
+	<div id="join" style="display: none;">
+		<label>Nick name</label>
+		<input type="text" name="name" id="name">
+		<input type="button" value="join" onclick="start()">
+	</div>
+	<div id="users" style="display: none;">
+		<h1>Available users</h1>
+		<ul id="users-list"></ul>
+	</div>
+	<div id="calling" style="display: none;">
+		<h1>Calling <span id="beingcalled"></span></h1>
+	</div>
+	<div id="incommingcall" style="display: none;">
+		<h1><span id="caller"></span> is calling</h1>
+		<button id="answer" onclick="answer()">Answer</button>
+	</div>
+	<div id="calling-page" style="display: none;">
+		<video src="" id="othervideo" style="width: 680;height: 320;" autoplay="true"></video>
+		<video src="" id="selfvideo" style="width: 680;height: 320;" autoplay="true"></video>
+		<img id="play">
+		<div id="logger"></div>
+	</div>
+	<script src="jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
